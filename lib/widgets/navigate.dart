@@ -25,7 +25,7 @@ class NavigatorLayout extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'De Traveler',
+                      'Draveler',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),

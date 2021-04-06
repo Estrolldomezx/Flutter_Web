@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildTabletAndMobile() => Column(
+  Widget buildTabletAndMobile() => ListView(
     children: [
       NavigatorLayout(),
       CalltoActionLayout(),
