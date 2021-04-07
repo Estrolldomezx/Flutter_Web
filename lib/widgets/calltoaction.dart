@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_web/utilities/dialog.dart';
+// ctrl+space to find
 class CalltoActionLayout extends StatelessWidget {
+  String user, password;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Stack(
       children: [
-        buildCenter(),
+        buildCenter(context),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,16 +37,35 @@ class CalltoActionLayout extends StatelessWidget {
     ));
   }
 
-  Center buildCenter() {
+  Center buildCenter(BuildContext context) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           buildUser(),
           buildPassword(),
-          buildLogin(),
+          buildLogin(context),
         ],
       ),
+    );
+  }
+
+  Container buildLogin(BuildContext context) {
+    return Container(
+      width: 200,
+      child: ElevatedButton(
+        onPressed: () {
+          print('user = $user, password = $password'); //see in terminal
+          if ((user == null || user.isEmpty) || (password == null || password.isEmpty)) {
+            print('Wrong username or password');
+            normalDialog(context, 'Login Failed', 'Please change your username or password');
+          }
+          else {
+            print('Login successful');
+          }
+        },
+        child: Text('Login'),
+      )
     );
   }
 
@@ -51,6 +73,7 @@ class CalltoActionLayout extends StatelessWidget {
         margin: EdgeInsets.only(top: 40),
         width: 200,
         child: TextField(
+          onChanged: (value) => user = value.trim(),
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.perm_identity),
             labelText: 'Username :',
@@ -62,6 +85,7 @@ class CalltoActionLayout extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 16),
         width: 200,
         child: TextField(
+          onChanged: (value) => password = value.trim(),
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.lock_outline),
             labelText: 'Password :',
@@ -71,19 +95,3 @@ class CalltoActionLayout extends StatelessWidget {
       );
 }
 
-class buildLogin extends StatelessWidget {
-  const buildLogin({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Text('Login'),
-      ),
-    );
-  }
-}
