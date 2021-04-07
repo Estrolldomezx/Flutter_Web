@@ -6,7 +6,7 @@ class NavigatorLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      // color: Colors.pink.shade100,
+      color: Colors.blue.shade50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -38,8 +38,24 @@ class NavigatorLayout extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextButton(onPressed: () {}, child: Text('HOME')),
-              TextButton(onPressed: () {}, child: Text('ABOUT')),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/home', (route) => false);
+                  },
+                  child: Text('HOME')),
+              SizedBox(
+                width: 50,
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/showImages', (route) => false);
+                  },
+                  child: Text('ABOUT')),
+              SizedBox(
+                width: 50,
+              ),
             ],
           ),
         ],
